@@ -146,6 +146,7 @@ func (s *KeccakTxSigner) Verify(tx *prototype.Transaction) error {
 	}
 
 	dgst := s.GetTxDomain(tx)
+	log.Printf("The digest: %v\n", dgst)
 	sign := tx.Signature
 
 	pubKey, err := crypto.SigToPub(dgst, sign)
