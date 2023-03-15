@@ -155,8 +155,8 @@ func (s *KeccakTxSigner) Verify(tx *prototype.Transaction) error {
 
 	addr := crypto.PubkeyToAddress(*pubKey)
 	log.Printf("The signature is: %s\n", common.Encode(sign))
-	log.Printf("The address is: %s\n", addr)
-	log.Printf("First address in inputs is: %s\n", tx.Inputs[0].Address)
+	log.Printf("The address is: %s\n", addr.Hex())
+	log.Printf("First address in inputs is: %s\n", common.BytesToAddress(tx.Inputs[0].Address).Hex())
 	if !bytes.Equal(addr.Bytes(), tx.Inputs[0].Address) {
 		return errors.New("Wrong signature given!!!")
 	}
