@@ -9,6 +9,7 @@ import (
 	ssz "github.com/ferranbt/fastssz"
 	"github.com/pkg/errors"
 	"github.com/raidoNetwork/RDO_v2/proto/prototype"
+	"github.com/raidoNetwork/RDO_v2/shared/common"
 	"github.com/raidoNetwork/RDO_v2/shared/crypto"
 	"github.com/raidoNetwork/RDO_v2/shared/crypto/secp256k1"
 )
@@ -153,6 +154,9 @@ func (s *KeccakTxSigner) Verify(tx *prototype.Transaction) error {
 	}
 
 	addr := crypto.PubkeyToAddress(*pubKey)
+	log.Printf("The signature is: %s\n", common.Encode(sign))
+	log.Printf("The address is: %s\n", addr)
+	log.Printf("First address in inputs is: %s\n", tx.Inputs[0].Address)
 	if !bytes.Equal(addr.Bytes(), tx.Inputs[0].Address) {
 		return errors.New("Wrong signature given!!!")
 	}
