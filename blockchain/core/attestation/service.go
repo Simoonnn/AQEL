@@ -135,11 +135,11 @@ func (s *Service) SendRawTx(tx *prototype.Transaction) error {
 	}
 
 	// Validate the transaction
-	typed := types.NewTransaction(tx)
-	err = s.txPool.validateTx(typed)
-	if err != nil {
-		return status.Error(17, err.Error())
-	}
+	// typed := types.NewTransaction(tx)
+	// err = s.txPool.validateTx(typed)
+	// if err != nil {
+	// 	return status.Error(17, err.Error())
+	// }
 
 	s.cfg.TxFeed.Send(types.NewTransaction(tx))
 
